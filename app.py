@@ -42,8 +42,7 @@ except:
     print('Error getting key')
     tb = sys.exc_info()[2]
     raise BaseException(...).with_traceback(tb)
-#currentStatus = checkStatus()
-currentStatus = 'TESTING!'
+currentStatus = checkStatus()
 if currentStatus != 'SOLD_OUT':
     sendTxt()
 else:
