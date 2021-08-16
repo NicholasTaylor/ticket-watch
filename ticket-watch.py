@@ -1,5 +1,4 @@
-from pathlib import Path
-import json, sys, requests, functionlib, config
+import requests, functions, config
 
 def checkStatus():
     url = 'https://www.eventbriteapi.com/v3/events/' +str(config.eventId) +'/ticket_classes/'
@@ -7,13 +6,15 @@ def checkStatus():
         'Authorization': 'Bearer ' +config.event_auth
     }
     r = requests.get(url, headers=headers)
+    print(r.json())
     status = r.json()['ticket_classes'][0]['on_sale_status']
     return status
 
-functionlib.validate()
+functions.validate()
 currentStatus = checkStatus()
 if currentStatus != 'SOLD_OUT':
     msg = 'Good news! Status change: ' +str(currentStatus) +' Gooo!\nhttps://www.eventbrite.com/e/' +str(config.eventId)
-    functionlib.sendTxt(msg)
+    functions.sendTxt(msg)
+    functions.lockScript()
 else:
     pass

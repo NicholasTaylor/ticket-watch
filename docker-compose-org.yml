@@ -5,4 +5,4 @@ services:
         build: .
         volumes:
             - '.:/opt/ticket-watch'
-        command: python ticket-watch.py
+        command: python -u org-watch.py

@@ -32,5 +32,4 @@ def sendTxt(msg):
         body = msg,
         to = config.twilio_phone
     )
-    lockScript()
     return(message.sid)

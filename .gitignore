@@ -130,3 +130,4 @@ dmypy.json
 
 # Sensitive stuff
 config.py
+orgs.json
