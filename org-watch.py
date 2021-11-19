@@ -17,7 +17,11 @@ def getOrgStatus(org,latestPage,events):
     r = requests.get(url, headers=headers)
     eventsList = []
     jsonOutput = r.json()
-    print('Reading from page ' +str(jsonOutput['pagination']['page_number']) +'.')
+    print('Org: %i' % (org))
+    try:
+        print('Reading from page ' +str(jsonOutput['pagination']['page_number']) +'.')
+    except:
+        pass
     outputs = jsonOutput['events']
     try:
         continuation = jsonOutput['pagination']['continuation']

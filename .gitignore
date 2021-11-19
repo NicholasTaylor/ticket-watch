@@ -128,6 +128,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# OS generated files
+.DS_Store
+
 # Sensitive stuff
 config.py
 orgs.json
