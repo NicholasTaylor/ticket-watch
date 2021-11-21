@@ -73,19 +73,23 @@ def orgValidate(orgs):
             org['events'] = []
 
 def main(orgs):
+    contacts = functions.genContacts(config.twilio_contacts)
     for org in orgs:
         newPage, newEventsList = (getOrgStatus(org['orgId'],org['latestPage'],org['events']))
         org['latestPage'] = newPage
+        contacts_batch = []
+        for contact in contacts:
+            if contact.is_optin(org['orgId']):
+                contacts_batch.append(contact.number)
         if len(newEventsList) > 0:
-            if len(newEventsList) > 1:
-                plural = 's'
-            else:
-                plural = ''
+            plural = 's' if len(newEventsList) > 1 else ''
             msg = 'Heads up. New event' +plural +' from ' +org['name'] +':\n'
             for event in newEventsList:
                 msg += event.name +': ' +event.url +'\n'
                 org['events'].append(event.id)
-            functions.sendTxt(msg)
+            if len(contacts_batch) > 0:
+                for number in contacts_batch:
+                    print(functions.sendTxt(number,msg))
     with open('orgs.json', 'w+') as writeFile:
         json.dump(orgs, writeFile)
 

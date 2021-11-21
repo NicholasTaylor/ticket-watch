@@ -1,4 +1,5 @@
 from pathlib import Path
+from classes import Contact
 import json, sys, config
 
 def lockScript():
@@ -24,12 +25,18 @@ def validate():
     except NameError:
         print('Check config.py. Something is undefined. Exiting.')
 
-def sendTxt(msg):
+def genContacts(contacts):
+    output = []
+    for contact in contacts:
+        output.append(Contact(contact['number'], contact['optins']))
+    return output
+
+def sendTxt(number,msg):
     from twilio.rest import Client
     client = Client(config.twilio_sid, config.twilio_auth_token)
     message = client.messages.create(
         messaging_service_sid = config.twilio_msg_svc,
         body = msg,
-        to = config.twilio_phone
+        to = number
     )
     return(message.sid)
