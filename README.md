@@ -32,11 +32,15 @@ twilio_contacts = [
 **Note:** Everything is required here except for the `eventId` variable. That is only required if you\'re going to use `ticket-watch.py`.
 
 **authRaw** - This is your API key from EventBrite. If you don\'t have an API key, just sign in with your EventBrite login at [their API signup page](https://www.eventbrite.com/signin/?referrer=%2Fplatform%2Fapi-keys%2F "their API signup page") and they should set you up. Once you have an API key, just go to [Eventbrite\'s Platform Page](https://www.eventbrite.com/platform/api-keys "Eventbrite\'s Platform Page") and your token should be an alphanumeric string right at the top.
+
 **eventId** - Can be found just by going to the tickets page of the event you want. The `eventId` will be a bunch of numbers at the end of the URI in your browser\'s address bar.
+
 **twilio_sid, twilio_auth_token, twilio_msg_svc** - `twilio_sid` is your Twilio account ID. The `twilio_auth_token` is the corresponding token for your account. `twilio_msg_svc` just pertains to the ID of whatever messaging service you want to use with this project. All 3 of these can be found when you sign up for a Twilio account. For the purposes of this readme, I\'m assuming you have basic Twilio competency. If you don\'t, their [tutorials](https://www.twilio.com/docs/tutorials "tutorials") and [quickstart](https://www.twilio.com/docs/quickstart?filter-product=SMS "quickstart") docs will be great at getting you up to speed.
 ### twilio_contacts
-This is a list of dictionaries for all the people you\'ll potentially want to contact. Each dictionary in the list should only carry two key/value pairs: **number** and **optins**.\
-**number** - This is the phone number of what you want to receive texts on. This should follow [E.164](https://www.twilio.com/docs/glossary/what-e164 "E.164") format. Which is essentially `+` then `country code` then the phone number in question. So, in the US, this might be `+15555555555` for 555-555-5555. In the UK, this would be `+442071838750` for `2071 838750`.\
+This is a list of dictionaries for all the people you\'ll potentially want to contact. Each dictionary in the list should only carry two key/value pairs: **number** and **optins**.
+
+**number** - This is the phone number of what you want to receive texts on. This should follow [E.164](https://www.twilio.com/docs/glossary/what-e164 "E.164") format. Which is essentially `+` then `country code` then the phone number in question. So, in the US, this might be `+15555555555` for 555-555-5555. In the UK, this would be `+442071838750` for `2071 838750`.
+
 **optins** - This is a list of all the org ID\'s you'll want this person to receive texts about.
 ## orgs.json
 You only need to do something with `orgs.json` if you\'re going to use `org-watch.py`, so it\'s kinda optional to set this up. It\'s just your standard array of objects. Each object is a different org:
