@@ -7,10 +7,8 @@ def getOrgs():
 
 def getOrgStatus(org,latestPage,events):
     page = latestPage
-    if latestPage and latestPage > 1:
-        url = 'https://www.eventbriteapi.com/v3/organizers/' +str(org) +'/events?page=' +str(latestPage)
-    else:
-        url = 'https://www.eventbriteapi.com/v3/organizers/' +str(org) +'/events/'
+    multipage = True if latestPage and latestPage > 1 else False
+    url = 'https://www.eventbriteapi.com/v3/organizers/' +str(org) +'/events?page=' +str(latestPage) if multipage else 'https://www.eventbriteapi.com/v3/organizers/' +str(org) +'/events/?page=1'
     headers = {
         'Authorization': 'Bearer ' +config.event_auth
     }
@@ -31,7 +29,7 @@ def getOrgStatus(org,latestPage,events):
     while has_more_items and continuation:
         page += 1
         print('More data available. Pulling from next page.')
-        url2 = url +'?continuation=' +continuation
+        url2 = url +'&continuation=' +continuation
         headers2 = {  
             'Authorization': 'Bearer ' +config.event_auth
         }
