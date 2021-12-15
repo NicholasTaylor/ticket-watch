@@ -16,7 +16,7 @@ def configCheck(configField, configName):
 def validate():
     assert checkLock() == False, 'Not unlocked. Or something is wrong with lock.json. Exiting.'
     try:
-        checks = [(config.event_auth, 'EventBrite Auth Token'), (config.twilio_sid, 'Twilio SID'), (config.twilio_auth_token, 'Twilio Auth Token'), (config.twilio_msg_svc, 'Twilio Message Service'), (config.twilio_phone, 'Phone number')]
+        checks = [(config.event_auth, 'EventBrite Auth Token'), (config.twilio_sid, 'Twilio SID'), (config.twilio_auth_token, 'Twilio Auth Token'), (config.twilio_msg_svc, 'Twilio Message Service'), (config.twilio_contacts, 'Twilio contacts')]
         for check in checks:
             cField, cName = check
             configCheck(cField, cName)
